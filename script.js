@@ -9,7 +9,9 @@ btn.addEventListener("click", () => {
     container.style.display = "flex";
     container.style.flexWrap = "wrap";
     document.body.appendChild(container);
+
     document.querySelectorAll(".elem").forEach((element) => element.remove());
+
     const bodyWidth = document.body.offsetWidth;
     let nrElem = prompt("How big do you want the grid? (Recommended: 64)");
     if(nrElem > 100)
@@ -18,7 +20,6 @@ btn.addEventListener("click", () => {
     for(let i = 0; i < nrElem * nrElem; i++) {
         const gridElem = document.createElement("div");
         let gridElemWidth = bodyWidth / nrElem - 7;
-        
         gridElem.style.minWidth = gridElemWidth.toString() + "px";
         gridElem.style.minHeight = gridElemWidth.toString() + "px";
         gridElem.classList.add("elem");
@@ -26,11 +27,10 @@ btn.addEventListener("click", () => {
         gridElem.addEventListener("mouseenter", () => {
             if (opacityValue < 0.1)
                 gridElem.style.background = randomRGB();
-            if(opacityValue < 1) {
+            if(opacityValue <= 0.9) {
                 opacityValue += 0.1;
                 gridElem.style.opacity = opacityValue.toString();
             }
-            console.log(gridElem.style.opacity.toString());
         });
         gridElem.addEventListener("mouseleave", () => {
             if (opacityValue < 0.1)
