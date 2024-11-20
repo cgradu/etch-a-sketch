@@ -4,25 +4,39 @@ btn.textContent = "Select Grid Size";
 btn.style.margin = "10px 10px";
 document.body.appendChild(btn);
 
+const container = document.createElement("div");
+container.style.display = "flex";
+container.style.justifyContent = "center";
+container.style.alignItems = "center";
+document.body.appendChild(container);
+
+const grid = document.createElement("div");
+grid.style.display = "flex";
+grid.style.flexWrap = "wrap";
+grid.style.border = "2px solid black";
+const gridWidth = 960;
+grid.style.width = gridWidth.toString() + "px";
+grid.style.height = grid.style.width;
+container.appendChild(grid);
+
 btn.addEventListener("click", () => {
-    const container = document.createElement("div");
-    container.style.display = "flex";
-    container.style.flexWrap = "wrap";
-    document.body.appendChild(container);
+
+
+    // console.log(grid.style.width);
 
     document.querySelectorAll(".elem").forEach((element) => element.remove());
 
-    const bodyWidth = document.body.offsetWidth;
     let nrElem = prompt("How big do you want the grid? (Recommended: 64)");
     if(nrElem > 100)
         nrElem = 100;
 
     for(let i = 0; i < nrElem * nrElem; i++) {
         const gridElem = document.createElement("div");
-        let gridElemWidth = bodyWidth / nrElem - 7;
+        let gridElemWidth = gridWidth / nrElem;
         gridElem.style.minWidth = gridElemWidth.toString() + "px";
         gridElem.style.minHeight = gridElemWidth.toString() + "px";
         gridElem.classList.add("elem");
+
         let opacityValue = 0;
         gridElem.addEventListener("mouseenter", () => {
             if (opacityValue < 0.1)
@@ -37,7 +51,7 @@ btn.addEventListener("click", () => {
                 gridElem.style.background = "white";
         });
         
-        container.appendChild(gridElem);
+        grid.appendChild(gridElem);
     }
 });
 
